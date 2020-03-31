@@ -1,0 +1,24 @@
+---
+title: 'Binomial Test: power & confidence'
+author: "Dr. J"
+date: "3/31/2020"
+output: html_document
+---
+
+# Power and confidence:
+For a given sample size, $n$ and a required $90^{th}$ percentile $p_{90}$,  
+  1  Determing the probability  r of the n exceed the $90{th}$ percentile  
+  2  For a specified $\delta$ determing the probability that r or fewer are less than $p_{90} - \delta$ 
+
+$H_0$: 90th percentile $\le$ r  
+$H_1$: 90th percentile $\gt$ r  
+
+Count the number of test results that exceed r. Type I error: you reject $H_0$ when $H_0$ is true.
+  
+```{r}
+n = 28
+for (j in 24:n){
+  print(paste(j, (1-pbinom(j, n, prob=0.9))))
+}  
+
+```
