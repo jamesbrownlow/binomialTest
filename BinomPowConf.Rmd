@@ -22,3 +22,27 @@ for (j in 24:n){
 }  
 
 ```
+
+### Decision Rule: reject $H_0$ if 27 or 28 observations exceed r  
+
+So with 28 observed data points, we need 27 or 28 of them to exceed r in order to reject $H_0$ and claim evidence that actual $90^{th}$ percentile exceeds r. We set a $\delta$ = 5% change in the percentile, r.  
+
+Power of the test?  Type II error: fail to reject $H_0$ when  $H_0$ is false. Let $\delta$ = 0.05: that is, the true probability of exceeding r is $0.9-\delta = 0.85$.  In other words the true probabilit of exceeding r is 0.85, not 0.90. The specified r is the $85^{th}$ not the $90^{th}$ percentile.  What, now, dear reader, is the probability we would fail to reject $H_0$?  Given the decision rule, reject $H_0$ if 27 or 28 successes, we find the probability of 26 or fewer successes (meaning we failed to reject $H_0$).  Power is 1-probability of Type II error
+
+```{r}
+d = 0.05
+for (j in 22:26){
+  print(paste(j, 1-pbinom(j,n,prob=0.9-d)))
+}
+
+```
+The power of the test is about 0.06
+
+## What about specifying $\delta$ in native units?  
+
+A listener from F-22 asks, "Dear Doctor- What if my alternative were expressed in native units (say feet).  How would I then get the poewer of the test?  Say the $r$ were 100 cubits, and I'm testing to see of that $r$ represents the $90^{th}$ percentile, but my alternative is that 110 is the $90^{th}$ percentile."
+
+
+No problem.  Once we have specified the decision rule, we simply compute the probability of a type II error under the assumed alternative condition.  Suppose r, in reality, is 10 cubits greater than the imagined value, 100, and hence to reject  
+
+probability of a type II error is probability of 26 or 27 observations < 100. Since the true 90th percentile is 110 we expect more than 27 of the observations to exceed 100.  Since the binomial  is in the exponential family of distributions, and is approximately normal for large n. 
